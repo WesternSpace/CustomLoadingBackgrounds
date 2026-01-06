@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Space Engineers 2": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Western\\AppData\\Roaming\\Pulsar\\Modern.exe",
+      "commandLineArgs": "-sources -f12menu -plugins:\"C:\\Users\\Western\\AppData\\Roaming\\SpaceEngineers2\\Plugins\\CustomScreenBackgrounds.dll\"",
+      "workingDirectory": "C:\\Users\\Western\\AppData\\Roaming\\Pulsar"
+    }
+  }
+}
