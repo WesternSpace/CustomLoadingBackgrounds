@@ -1,79 +1,173 @@
-﻿using System.Collections.Generic;
+﻿using Avalonia.Controls;
+using CustomScreenBackgrounds.Util;
+using Keen.Game2.Client.UI.Menu;
+using Keen.Game2.Client.UI.Menu.MainMenu;
+using Keen.Game2.Client.UI.Menu.News;
+using Keen.VRage.UI.Shared.Extensions;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CustomScreenBackgrounds.Config
+namespace CustomScreenBackgrounds.Config;
+
+public class PluginConfig : INotifyPropertyChanged
 {
-    public class PluginConfig : INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private void SetValue<T>(ref T field, T value, [CallerMemberName] string propName = "")
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        if (EqualityComparer<T>.Default.Equals(field, value))
+            return;
 
-        private void SetValue<T>(ref T field, T value, [CallerMemberName] string propName = "")
+        field = value;
+
+        OnPropertyChanged(propName);
+    }
+
+    private void OnPropertyChanged([CallerMemberName] string propName = "")
+    {
+        PropertyChangedEventHandler propertyChanged = PropertyChanged;
+        if (propertyChanged == null)
+            return;
+
+        propertyChanged(this, new PropertyChangedEventArgs(propName));
+    }
+
+    private bool hideRightImage = true;
+    private bool hideNews = true;
+    private bool hideMainMenuKeenLogo = true;
+    private bool hideMainMenuButtonsBackground = true;
+    private bool hideMainMenuVersionString = false;
+    private bool customMainMenuOverlay = false;
+    private bool smallerMainMenu = true;
+
+    private bool cleanLoadingMenu = true;
+    
+    private bool customLoadingMenuOverlay = false;
+    private bool showloadingScreenPercent = true;
+
+    public bool HideRightImage 
+    { 
+        get => hideRightImage;
+        set
         {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return;
-
-            field = value;
-
-            OnPropertyChanged(propName);
+            UiTools.GetScreenManager()?.
+                GetScreenofType<MainMenuScreen>()?.
+                FindChildOfType<Image>("PART_HighlightPresenter")?.
+                IsVisible = !value;
+            
+            SetValue(ref hideRightImage, value);
         }
+    }
 
-        private void OnPropertyChanged([CallerMemberName] string propName = "")
+    public bool HideNews 
+    { 
+        get => hideNews;
+        set
         {
-            PropertyChangedEventHandler propertyChanged = PropertyChanged;
-            if (propertyChanged == null)
-                return;
+            UiTools.GetScreenManager()?.
+               GetScreenofType<MainMenuScreen>()?.
+               FindChildOfType<News>("PART_NewsPresenter")?.
+               IsVisible = !value;
 
-            propertyChanged(this, new PropertyChangedEventArgs(propName));
+            SetValue(ref hideNews, value);
         }
+    }
 
-        private bool mainMenuOverlay = false;
-        private bool mainMenuOverlay2 = false;
-        private bool loadingScreenOverlay = false;
-        private bool cleanLoadingMenu = true;
-        private bool customMainMenuOverlay = false;
-        private bool customLoadingMenuOverlay = false;
-        private bool showloadingScreenPercent = true;
-
-        public bool MainMenuOverlay 
-        { 
-            get => mainMenuOverlay; 
-            set => SetValue(ref mainMenuOverlay, value); 
-        }
-
-        public bool MainMenuOverlay2 
-        { 
-            get => mainMenuOverlay2; 
-            set => SetValue(ref mainMenuOverlay2, value); 
-        }
-
-        public bool LoadingScreenOverlay 
-        { 
-            get => loadingScreenOverlay; 
-            set => SetValue(ref loadingScreenOverlay, value); 
-        }
-
-        public bool CleanLoadingMenu 
-        { 
-            get => cleanLoadingMenu; 
-            set => SetValue(ref cleanLoadingMenu, value); 
-        }
-
-        public bool CustomMainMenuOverlay
+    public bool HideMainMenuKeenLogo 
+    { 
+        get => hideMainMenuKeenLogo;
+        set
         {
-            get => customMainMenuOverlay;
-            set => SetValue(ref customMainMenuOverlay, value);
-        }
+            UiTools.GetScreenManager()?.
+               GetScreenofType<MainMenuScreen>()?.
+               FindChildOfType<GameMenu>()?.
+               FindChildOfType<Grid>()?.
+               FindChildOfTypeNonRecursive<Image>()?.IsVisible = !value;
 
-        public bool CustomLoadingMenuOverlay
+            UiTools.GetScreenManager()?.
+               GetScreenofType<MainMenuScreen>()?.
+               FindChildOfType<Border>("PART_KeenLogoHit")?.IsVisible = !value;
+
+            SetValue(ref hideMainMenuKeenLogo, value); 
+        }
+    }
+
+    public bool HideMainMenuButtonsBackground
+    {
+        get => hideMainMenuButtonsBackground;
+        set
         {
-            get => customLoadingMenuOverlay;
-            set => SetValue(ref customLoadingMenuOverlay, value);
+            UiTools.GetScreenManager()?.
+               GetScreenofType<MainMenuScreen>()?.
+               FindChildOfType<GameMenu>()?.
+               FindChildOfType<Grid>()?.
+               FindChildOfTypeNonRecursive<Grid>()?.IsVisible = !value;
+
+            if (value)
+            {
+                UiTools.GetScreenManager()?.
+                    GetScreenofType<MainMenuScreen>()?.
+                    FindChildOfType<GameMenu>()?.
+                    FindChildOfType<Grid>()?.
+                    FindChildOfTypeNonRecursive<Canvas>()?.
+                    FindChildOfTypeNonRecursive<Grid>()?[Canvas.LeftProperty] = 40f;
+            }
+            else
+            {
+                UiTools.GetScreenManager()?.
+                    GetScreenofType<MainMenuScreen>()?.
+                    FindChildOfType<GameMenu>()?.
+                    FindChildOfType<Grid>()?.
+                    FindChildOfTypeNonRecursive<Canvas>()?.
+                    FindChildOfTypeNonRecursive<Grid>()?[Canvas.LeftProperty] = 116f;
+            }
+
+
+            SetValue(ref hideMainMenuButtonsBackground, value);
         }
-        public bool ShowLoadingMenuPercent 
-        { 
-            get => showloadingScreenPercent; 
-            set => SetValue(ref showloadingScreenPercent, value); 
+    }
+
+    public bool HideMainMenuVersionString
+    {
+        get => hideMainMenuVersionString;
+        set
+        {
+            UiTools.GetScreenManager()?.
+                GetScreenofType<MainMenuScreen>()?.
+                FindChildOfType<GameMenu>()?.
+                FindChildOfType<Grid>()?.
+                FindChildOfTypeNonRecursive<TextBlock>()?.IsVisible = !value;
+
+            SetValue(ref hideMainMenuVersionString, value);
         }
+    }
+
+    public bool CustomMainMenuOverlay
+    {
+        get => customMainMenuOverlay;
+        set => SetValue(ref customMainMenuOverlay, value);
+    }
+
+    public bool SmallerMainMenu
+    {
+        get => smallerMainMenu;
+        set => SetValue(ref smallerMainMenu, value);
+    }
+
+    public bool CleanLoadingMenu 
+    { 
+        get => cleanLoadingMenu; 
+        set => SetValue(ref cleanLoadingMenu, value); 
+    }
+
+    public bool CustomLoadingMenuOverlay
+    {
+        get => customLoadingMenuOverlay;
+        set => SetValue(ref customLoadingMenuOverlay, value);
+    }
+    public bool ShowLoadingMenuPercent 
+    { 
+        get => showloadingScreenPercent; 
+        set => SetValue(ref showloadingScreenPercent, value); 
     }
 }

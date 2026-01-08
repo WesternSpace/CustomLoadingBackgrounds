@@ -69,4 +69,8 @@
 		<Publicize Include="0Harmony" />
 		<Publicize Include="VRage.Library" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<PostBuildEvent>call "$(MSBuildProjectDirectory)\Deploy.bat" "$(AssemblyName).dll" "$(MSBuildProjectDirectory)\$(OutputPath)bin\$(Platform)\$(Configuration)\$(TargetFramework)"</PostBuildEvent>
+	</PropertyGroup>
 </Project>

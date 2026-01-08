@@ -4,11 +4,6 @@ using CustomScreenBackgrounds.Patches;
 using CustomScreenBackgrounds.Util;
 using HarmonyLib;
 using Keen.Game2.Game.Plugins;
-using Keen.VRage.Core.EngineComponents;
-using Keen.VRage.Core.Project;
-using Keen.VRage.Library.Filesystem;
-using Keen.VRage.Library.Utils;
-using System.Reflection;
 
 namespace CustomScreenBackgrounds;
 
@@ -32,7 +27,11 @@ public class Plugin : IPlugin, IDisposable
 
         Log.Info("Loading");
 
-        new Harmony(Name + ".Early").PatchCategory("Early");
+        if (!PatchHelpers.HarmonyPatchEarly(Log, new Harmony(Name +".Early")))
+        {
+            Log.Debug("Failed to load");
+            return;
+        }
 
         Log.Debug("Successfully loaded");
     }
@@ -47,7 +46,7 @@ public class Plugin : IPlugin, IDisposable
         config = PersistentConfig<PluginConfig>.Load(Log, PluginFileSystem.RootFolder, Path.Combine(PluginFileSystem.ConfigFolderPath, ConfigFileName));
 
 
-        if (!PatchHelpers.HarmonyPatchAll(Log, new Harmony(Name)))
+        if (!PatchHelpers.HarmonyPatchLate(Log, new Harmony(Name)))
         {
             return;
         }
