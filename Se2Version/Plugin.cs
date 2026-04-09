@@ -28,6 +28,7 @@ public class Plugin : IPlugin, IDisposable
         Instance = this;
 
         Log.Info("Loading");
+        Log.Info("SE2-test build");
 
         if (!PatchHelpers.HarmonyPatchEarly(Log, new Harmony(Name +".Early")))
         {
