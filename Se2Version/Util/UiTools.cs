@@ -6,6 +6,7 @@ using Keen.VRage.Core;
 using Keen.VRage.Library.Utils;
 using Keen.VRage.UI.EngineComponents;
 using Keen.VRage.UI.Screens;
+using System.Linq;
 
 namespace CustomScreenBackgrounds.Util;
 internal static class UiTools

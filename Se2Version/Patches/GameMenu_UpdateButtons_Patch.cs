@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Keen.Game2.Client.UI.Menu;
 using Keen.VRage.UI.Shared.Extensions;
+using System.Collections.Generic;
 
 namespace CustomScreenBackgrounds.Patches;
 

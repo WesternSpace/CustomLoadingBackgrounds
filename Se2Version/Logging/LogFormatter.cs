@@ -1,5 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace CustomScreenBackgrounds.Logging;
 public class LogFormatter

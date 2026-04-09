@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using CustomScreenBackgrounds.Logging;
+using System;
 
 namespace CustomScreenBackgrounds.Patches;
 

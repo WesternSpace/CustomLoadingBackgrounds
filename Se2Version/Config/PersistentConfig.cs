@@ -1,6 +1,9 @@
 ﻿using CustomScreenBackgrounds.Logging;
 using Keen.VRage.Library.Filesystem;
+using System;
 using System.ComponentModel;
+using System.IO;
+using System.Threading;
 using System.Xml.Serialization;
 
 namespace CustomScreenBackgrounds.Config;

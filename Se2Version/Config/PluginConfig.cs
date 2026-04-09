@@ -4,6 +4,7 @@ using Keen.Game2.Client.UI.Menu;
 using Keen.Game2.Client.UI.Menu.MainMenu;
 using Keen.Game2.Client.UI.Menu.News;
 using Keen.VRage.UI.Shared.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

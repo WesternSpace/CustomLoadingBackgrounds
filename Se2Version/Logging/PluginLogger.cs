@@ -1,4 +1,5 @@
 ﻿using Keen.VRage.Library.Diagnostics;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace CustomScreenBackgrounds.Logging;

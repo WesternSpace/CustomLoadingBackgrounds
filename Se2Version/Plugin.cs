@@ -4,6 +4,8 @@ using CustomScreenBackgrounds.Patches;
 using CustomScreenBackgrounds.Util;
 using HarmonyLib;
 using Keen.Game2.Game.Plugins;
+using System;
+using System.IO;
 
 namespace CustomScreenBackgrounds;
 

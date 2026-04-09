@@ -1,6 +1,10 @@
 ﻿using Keen.Game2.Client.UI.Library;
 using Keen.VRage.Library.Filesystem;
 using Keen.VRage.Library.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace CustomScreenBackgrounds.Util;
