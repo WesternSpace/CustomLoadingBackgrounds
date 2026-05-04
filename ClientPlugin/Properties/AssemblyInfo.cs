@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CustomScreenBackgrounds")]
 [assembly: AssemblyDescription("A plugin that allows you to customize the background on the loading screen and main menu.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("WesternGamer")]
+[assembly: AssemblyCompany("WesternSpace")]
 [assembly: AssemblyProduct("CustomScreenBackgrounds")]
-[assembly: AssemblyCopyright("Copyright © WesternGamer 2025")]
+[assembly: AssemblyCopyright("Copyright © WesternSpace 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
