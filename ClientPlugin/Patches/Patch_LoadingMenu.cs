@@ -22,7 +22,7 @@ namespace CustomScreenBackgrounds.Patches
 
         private static bool Prefix(float ___m_transitionAlpha, string ___m_customTextFromConstructor,
             MyGuiControlMultilineText ___m_multiTextControl, StringBuilder ___m_authorWithDash, string ___m_backgroundScreenTexture,
-            ref MyGuiControlRotatingWheel ___m_wheel, float ___m_progress)
+            ref MyGuiControlRotatingWheel ___m_wheel, float ___m_progress, MyGuiControlDlcBadgeWall ___m_badgeWall)
         {
             Rectangle fullscreenRectangle = MyGuiManager.GetFullscreenRectangle();
             MyGuiManager.DrawSpriteBatch("Textures\\GUI\\Blank.dds", fullscreenRectangle, Color.Black, false, true);
@@ -61,6 +61,8 @@ namespace CustomScreenBackgrounds.Patches
             if (Plugin.Instance.Config.CleanLoadingMenu)
             {
                 ___m_wheel.Visible = false;
+                ___m_badgeWall.Visible = false;
+
                 if (Plugin.Instance.Config.ShowLoadingMenuPercent)
                 {
                     MyGuiManager.DrawString("LoadingScreen", $"{Math.Round(___m_progress * 100)}%", new Vector2(0.94f, 0.96f), MyGuiSandbox.GetDefaultTextScaleWithLanguage() * 1.1f, new Color(MyGuiConstants.LOADING_PLEASE_WAIT_COLOR * ___m_transitionAlpha), MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_BOTTOM, true);
